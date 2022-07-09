@@ -1,0 +1,21 @@
+
+<!--.log a {-->
+<!--position: fixed;-->
+<!--right: 0;-->
+<!--top: 0;-->
+<!--text-align: center;-->
+<!--width: 150px;-->
+<!--font-size: 18px;-->
+<!--border: 2px solid #FF0000;-->
+
+<!--}-->
+{% block body_block %}
+    <h2 style="text-align:center"> Add a problem </h2>
+    <form id="ProblemForm" method="post" action="/judge/add-problem/"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ problem_form.as_p }}
+
+        <input type="submit" name="submit" value = "add problem" />
+    </form>
+{% endblock %}

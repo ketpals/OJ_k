@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+table.t2{
+border-collapse: collapse;
+font_size: 15px;
+  width: 50%;
+  display:inline-table;
+}
+<!--td {-->
+<!--  text-align: center;-->
+<!--}-->
+<!--td.a {-->
+<!--text-align: left;-->
+<!--}-->
+table.t1{
+border-collapse: collapse;
+font_size: 15px;
+  width: 50%;
+  display:inline-table;
+}
+.log a {
+position: fixed;
+right: 0;
+top: 0;
+text-align: center;
+width: 150px;
+font-size: 18px;
+border: 2px solid #FF0000;
+
+}
+.log1 a {
+position: absolute;
+right: 150px;
+top: 0;
+text-align: center;
+width: 110px;
+font-size: 18px;
+
+}
+.add {
+            background-color: white;
+            color: black;
+            padding: 5px 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+</style>
+</head>
+<body>
+<!--{% if request.user.is_superuser %}-->
+<!--<p>Welcome A</p>-->
+<!--{% else %}-->
+Welcome {{request.user}}
+<!--{% endif %}-->
+<div class="log">
+    <a href="/logout">Logout</a>
+    </div>
+<!--{% if request.user.is_anonymous %}-->
+<div class="log1">
+    <a href="/judge/add-problem/">
+        <button class="add" type="submit">
+            Add Problem
+        </button></a>
+    </div>
+<!--{% endif %}-->
+</body>
+{% if problems_list %}
+ <table class="t1">
+  <tr>
+    <th style="width:80px">Problems</th>
+    <th style="width:80px">Difficulty level</th>
+    <th style="width:80px">Solved status</th>
+  </tr>
+        </table>
+    <ol>
+    {% for problem in problems_list %}
+            <table class="t2">
+  <tr>
+      <td style="width:80px"><li><a href="/judge/{{ problem.id }}/">{{ problem.problem_name }} </a></li></td>
+    <td align="center"; style="width:80px">{{problem.diff}}</td>
+    <td align="center"; style="width:80px">{{ problem.problem_solved }}</td>
+  </tr>
+</table>
+<!--        <li><a href="/judge/{{ problem.id }}/">{{ problem.problem_name }} </a>-->
+<!--            {{problem.diff}} <h6> Problem solved status : {{ problem.problem_solved }} </h6></li>-->
+
+    {% endfor %}
+    </ol>
+{% else %}
+    <p>No problems are available.</p>
+{% endif %}
+</html>
